@@ -27,8 +27,8 @@ static void prueba_abb_vacio(void) {
     //Pruebo que pertenece en un abb vacio es falso
     print_test("Pertenece devuelve falso", !abb_pertenece(abb, A));
 
-    //Pruebo que borrar el primero de la abb devuelve NULL
-    //print_test("Borrar primero devuelve NULL", abb_borrar_primero(abb) == NULL);
+    //Pruebo que borrar en abb vacio devuelve NULL
+    print_test("Borrar devuelve NULL", abb_borrar(abb, A) == NULL);
 
     //Destruccion de la abb
     abb_destruir(abb);
