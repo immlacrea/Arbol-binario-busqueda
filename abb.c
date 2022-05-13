@@ -27,7 +27,7 @@ struct nodo {
 nodo_t* nodo_crear(const char* clave, void* dato) {
     nodo_t* nodo = malloc(sizeof(nodo_t));
 
-    if (!nodo) return NULL;
+    if (nodo == NULL) return NULL;
 
     nodo->dato = dato;
     nodo->clave = strdup(clave);
@@ -38,7 +38,7 @@ nodo_t* nodo_crear(const char* clave, void* dato) {
 }
 
 nodo_t* buscar(const char* clave, nodo_t* nodo, abb_comparar_clave_t cmp) {
-    if (!nodo) return NULL;
+    if (nodo == NULL) return NULL;
 
     int comparar = cmp(clave, nodo->clave);
     if (comparar <0) {
@@ -49,9 +49,9 @@ nodo_t* buscar(const char* clave, nodo_t* nodo, abb_comparar_clave_t cmp) {
         return nodo;
     }
 }
-/*
+
 void destruir(nodo_t* nodo, abb_destruir_dato_t destruir_dato) {
-    if (!nodo) {
+    if (nodo != NULL) {
         if (destruir_dato) destruir_dato(nodo->dato);
         
         free(nodo->clave);
@@ -59,18 +59,21 @@ void destruir(nodo_t* nodo, abb_destruir_dato_t destruir_dato) {
         destruir(nodo->der, destruir_dato);
         free(nodo);
     }
-    nodo = NULL;
-}
-*/
-nodo_t* sucesor(nodo_t* nodo) {
-    if (!nodo->izq) return nodo;
-    return sucesor(nodo->izq);
 }
 
+nodo_t* sucesor(nodo_t* nodo) {
+    if (nodo->izq == NULL) return nodo;
+    return sucesor(nodo->izq);
+}
+/*
+void* borrar(nodo_t* nodo, abb_destruir_dato_t destruir_dato) {
+
+}
+*/
 abb_t* abb_crear(abb_comparar_clave_t cmp, abb_destruir_dato_t destruir_dato) {
     abb_t* abb = malloc(sizeof(abb_t));
 
-    if (!abb) return NULL;
+    if (abb == NULL) return NULL;
 
     abb->raiz = NULL;
     abb->cantidad = 0;
@@ -87,9 +90,9 @@ size_t abb_cantidad(const abb_t *arbol) {
 bool abb_guardar(abb_t *arbol, const char *clave, void *dato) {
     nodo_t* nodo = buscar(clave, arbol->raiz, arbol->comparar);
 
-    if (!nodo) {
+    if (nodo == NULL) {
         nodo = nodo_crear(clave, dato);
-        if (!nodo) return false;
+        if (nodo == NULL) return false;
     } else {
         if (arbol->destruir_dato) arbol->destruir_dato(nodo->dato);
         nodo->dato = dato;
@@ -101,26 +104,28 @@ bool abb_guardar(abb_t *arbol, const char *clave, void *dato) {
 void *abb_borrar(abb_t *arbol, const char *clave) {
     nodo_t* nodo = buscar(clave, arbol->raiz, arbol->comparar);
     
-    if (!nodo) return NULL;  
+    if (!nodo) return NULL;
+
+    if (nodo->izq == NULL) {
+
+    }
 }
 */
 bool abb_pertenece(const abb_t *arbol, const char *clave) {
     nodo_t* nodo = buscar(clave, arbol->raiz, arbol->comparar);
 
-    if (!nodo) return false;
+    if (nodo == NULL) return false;
     return true;
 }
 
 void *abb_obtener(const abb_t *arbol, const char *clave) {
     nodo_t* nodo = buscar(clave, arbol->raiz, arbol->comparar);
 
-    if (!nodo) return NULL;
+    if (nodo == NULL) return NULL;
     return nodo->dato;
 }
-/*
+
 void abb_destruir(abb_t *arbol) {
     destruir(arbol->raiz, arbol->destruir_dato);
-    //arbol->raiz = NULL;
     free(arbol);
 }
-*/
