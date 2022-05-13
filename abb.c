@@ -117,9 +117,10 @@ void *abb_obtener(const abb_t *arbol, const char *clave) {
     if (!nodo) return NULL;
     return nodo->dato;
 }
-
+/*
 void abb_destruir(abb_t *arbol) {
     destruir(arbol->raiz, arbol->destruir_dato);
     //arbol->raiz = NULL;
     free(arbol);
 }
+*/
