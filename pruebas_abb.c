@@ -7,7 +7,7 @@
 
 //Pruebas para un abb vacio
 static void prueba_abb_vacio(void) {
-    printf("INICIO DE PRUEBAS CON ABB VACIAO\n");
+    printf("INICIO DE PRUEBAS CON ABB VACIO\n");
 
     //Clave para las pruebas
     char* A = "a";
