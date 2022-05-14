@@ -138,9 +138,9 @@ void *abb_borrar(abb_t *arbol, const char *clave) {
     arbol->cantidad--;
     return dato;
 }
-
+/*
 bool abb_pertenece(const abb_t *arbol, const char *clave) {
-    nodo_t* *nodo = buscar(clave, &(arbol->raiz), arbol->comparar);
+    nodo_t* *nodo = buscar(clave,  &(arbol->raiz), arbol->comparar);
 
     if (*nodo == NULL) return false;
     return true;
@@ -152,7 +152,7 @@ void *abb_obtener(const abb_t *arbol, const char *clave) {
     if (*nodo == NULL) return NULL;
     return (*nodo)->dato;
 }
-
+*/
 void abb_destruir(abb_t *arbol) {
     destruir(arbol->raiz, arbol->destruir_dato);
     free(arbol);
