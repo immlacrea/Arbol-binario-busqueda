@@ -37,8 +37,9 @@ nodo_t* nodo_crear(const char* clave, void* dato) {
     return nodo;
 }
 
+//Cambiar implementacion
 nodo_t* buscar(const char* clave, nodo_t* nodo, abb_comparar_clave_t cmp) {
-    if (nodo == NULL) return NULL;
+    if (nodo == NULL) return nodo;
 
     int comparar = cmp(clave, nodo->clave);
     if (comparar <0) {
@@ -112,13 +113,16 @@ bool abb_guardar(abb_t *arbol, const char *clave, void *dato) {
     nodo_t* nodo = buscar(clave, arbol->raiz, arbol->comparar);
 
     if (nodo == NULL) {
-        nodo = nodo_crear(clave, dato);
-        if (nodo == NULL) return false;
+        if (arbol->cantidad == 0) {
+            arbol->raiz = nodo_crear(clave, dato);
+        } else {
+            nodo = nodo_crear(clave, dato);
+        }
+        arbol->cantidad++;
     } else {
         if (arbol->destruir_dato) arbol->destruir_dato(nodo->dato);
         nodo->dato = dato;
     }
-    arbol->cantidad++;
     return true;
 }
 
