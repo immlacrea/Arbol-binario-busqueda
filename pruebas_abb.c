@@ -44,7 +44,7 @@ static void prueba_abb_guardar_obtener(void) {
     char* datoA = "homero", *datoB = "marge", *datoC = "lisa";
     char* datoD = "bart", *datoE = "abraham", *datoF = "maggie";
 
-    //char* G = "g"; 
+    char* G = "g"; 
     char* datoH = "milhouse";
 
     //Declaro el abb a utilizar
@@ -59,7 +59,7 @@ static void prueba_abb_guardar_obtener(void) {
     ok &= abb_guardar(abb, A, datoA) && abb_guardar(abb, C, datoC);
     print_test("Se guardaron todos los Simpson", ok);
     print_test("Son 5 los Simpson", abb_cantidad(abb) == 5);
-/*
+
     //Pruebas de pertenecer
     print_test("Bart pertenece al arbol", abb_pertenece(abb, D));
     print_test("Marge pertenece al abb", abb_pertenece(abb, B));
@@ -71,14 +71,14 @@ static void prueba_abb_guardar_obtener(void) {
     print_test("Obtener A devuelve homero", (char*)abb_obtener(abb, A) == datoA);
     print_test("Obtener D devuelve bart", (char*)abb_obtener(abb, D) == datoD);
     print_test("Obtener F, abraham, devuelve NULL", (char*)abb_obtener(abb, E) == NULL);
-*/
+
     //Guardar datos nuevos
     print_test("Se guardo a abraham en el abb", abb_guardar(abb, E, datoE));
-    //print_test("Abraham ahora pertenece al abb", abb_pertenece(abb, E));
-    //print_test("Obtener F ahora devuelve abraham", (char*)abb_obtener(abb, E) == datoE);
+    print_test("Abraham ahora pertenece al abb", abb_pertenece(abb, E));
+    print_test("Obtener F ahora devuelve abraham", (char*)abb_obtener(abb, E) == datoE);
     print_test("Ahora son 6 los Simpson", abb_cantidad(abb) == 6);
     print_test("Se guardo milhouse en la clave de bart", abb_guardar(abb, D, datoH));
-    //print_test("Obtener D ahora devuelve milhouse", (char*)abb_obtener(abb, D) == datoH);
+    print_test("Obtener D ahora devuelve milhouse", (char*)abb_obtener(abb, D) == datoH);
     print_test("Siguen siendo 6 los Simpson", abb_cantidad(abb) == 6);
 
     //Destruccion de la abb
