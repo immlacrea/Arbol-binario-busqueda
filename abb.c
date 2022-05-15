@@ -37,19 +37,6 @@ nodo_t* nodo_crear(const char* clave, void* dato) {
     return nodo;
 }
 
-nodo_t* *buscar_2(const char* clave, nodo_t* *nodo, abb_comparar_clave_t cmp) {
-    if (*nodo == NULL) return nodo;
-
-    int comparar = cmp(clave, (*nodo)->clave);
-    if (comparar <0) {
-        return buscar_2(clave, &(*nodo)->izq, cmp);
-    } else if (comparar >0) {
-        return buscar_2(clave, &(*nodo)->der, cmp);
-    } else {
-        return nodo;
-    }
-}
-
 //Cambiar implementacion
 void* buscar(const char* clave, void* _nodo, abb_comparar_clave_t cmp) {
 
