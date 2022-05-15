@@ -20,13 +20,13 @@ static void prueba_abb_vacio(void) {
 
     //Pruebo que la abb nueva esta vacia
     print_test("El abb esta vacio", abb_cantidad(abb) == 0);
-/*
+
     //Obtener en un abb vacio es NULL
     print_test("Obtener un dato es NULL", abb_obtener(abb, A) == NULL);
 
     //Pruebo que pertenece en un abb vacio es falso
     print_test("Pertenece devuelve falso", !abb_pertenece(abb, A));
-*/
+
     //Pruebo que borrar en abb vacio devuelve NULL
     print_test("Borrar devuelve NULL", abb_borrar(abb, A) == NULL);
 
