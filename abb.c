@@ -159,3 +159,21 @@ void abb_destruir(abb_t *arbol) {
     destruir(arbol->raiz, arbol->destruir_dato);
     free(arbol);
 }
+
+/* iteradores */
+
+struct abb_iter{
+    pila_t* pila;
+};
+
+abb_iter_t *abb_iter_in_crear(const abb_t *arbol){
+    abb_iter_t* it = malloc(sizeof(abb_iter_t));
+    if(!it) return NULL;
+    it->pila = pila_crear();
+    return it;
+}
+
+void abb_iter_in_destruir(abb_iter_t* iter){
+    pila_destruir(iter->pila);
+    free(iter);
+}
