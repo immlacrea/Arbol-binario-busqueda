@@ -173,6 +173,10 @@ abb_iter_t *abb_iter_in_crear(const abb_t *arbol){
     return it;
 }
 
+bool abb_iter_in_al_final(const abb_iter_t *iter){
+    return pila_esta_vacia(iter->pila);
+}
+
 void abb_iter_in_destruir(abb_iter_t* iter){
     pila_destruir(iter->pila);
     free(iter);
