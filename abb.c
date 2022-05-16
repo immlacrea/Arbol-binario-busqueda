@@ -166,11 +166,34 @@ struct abb_iter{
     pila_t* pila;
 };
 
+void apilar_hijos_izquierdos(nodo_t* nodo, pila_t* pila){
+    while(nodo){
+        pila_apilar(pila, nodo);
+        nodo = nodo->izq;
+    }
+}
+
 abb_iter_t *abb_iter_in_crear(const abb_t *arbol){
     abb_iter_t* it = malloc(sizeof(abb_iter_t));
     if(!it) return NULL;
     it->pila = pila_crear();
+    apilar_hijos_izquierdos(arbol->raiz, it->pila);
     return it;
+}
+
+bool abb_iter_in_avanzar(abb_iter_t *iter){
+    if(pila_esta_vacia(iter->pila)) return false;
+    nodo_t* nodo = pila_desapilar(iter->pila);
+    apilar_hijos_izquierdos(nodo->der, iter->pila);
+    return true;
+}
+
+const char *abb_iter_in_ver_actual(const abb_iter_t *iter){
+    if(pila_esta_vacia(iter->pila)) return NULL;
+
+    nodo_t* nodo = pila_ver_tope(iter->pila);
+
+    return nodo->clave;
 }
 
 bool abb_iter_in_al_final(const abb_iter_t *iter){
@@ -180,4 +203,24 @@ bool abb_iter_in_al_final(const abb_iter_t *iter){
 void abb_iter_in_destruir(abb_iter_t* iter){
     pila_destruir(iter->pila);
     free(iter);
+}
+
+void abb_in_order(abb_t *arbol, bool visitar(const char *, void *, void *), void *extra){
+    if (!arbol->raiz) return ;
+
+    pila_t* pila = pila_crear();
+
+    apilar_hijos_izquierdos(arbol->raiz, pila);
+
+    bool ok = true;
+
+    while(ok && !pila_esta_vacia(pila)){
+        nodo_t* nodo = pila_desapilar(pila);
+        ok = visitar(nodo->clave,nodo->dato,extra);
+        if(!ok) continue;
+        apilar_hijos_izquierdos(nodo->der, pila);
+    }
+
+    pila_destruir(pila);
+
 }
